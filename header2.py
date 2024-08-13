@@ -6,7 +6,7 @@ import copy
 import serial
 import re
 
-fsr_threshold = 300
+fsr_threshold = 1800
 blackkeypproportions = [(1, 28.5, 2, 6), (2, 34.1, 3, 12.9), (3, 41.1, 4, 20.3), (5, 32.5, 6, 11.5), (6, 35.5, 7, 14.5), (8, 28.5, 9, 6), (9, 34.1, 10, 12.9), (10, 41.1, 11, 20.3), (12, 32.5, 13, 11.5), (13, 35.5, 14, 14.5), (15, 28.5, 16, 6), (16, 34.1, 17, 12.9), (17, 41.1, 18, 20.3), (19, 32.5, 20, 11.5), (20, 35.5, 21, 14.5), (22, 28.5, 23, 6), (23, 34.1, 24, 12.9), (24, 41.1, 25, 20.3)]
 landmark_labels = [
     'WRIST',
@@ -20,10 +20,10 @@ fingertip_indices = [4, 8, 12, 16, 20]
 whitekeymidinotes = [41, 43, 45, 47, 48, 50, 52, 53, 55, 57, 59, 60, 62, 64, 65, 67, 69, 71, 72, 74, 76, 77, 79, 81, 83, 84]
 blackkeymidinotes = [42, 44, 46, 49, 51, 54, 56, 58, 61, 63, 66, 68, 70, 73, 75, 78, 80, 82]
 finger_colours = [(0, 255, 255), (255, 255, 0), (255, 0, 255), (0, 255, 0), (255, 0, 0), (0, 0, 255), (255, 255, 255), (255, 128, 0), (0, 255, 128), (128, 0, 255)]
-moveunit = 2
-rotateunit = 0.25
+moveunit = 2 
+rotateunit = 0.25 
 keyplayedradius = 10
-pianoproportion = 260 / 1222
+pianoproportion = 270 / 1222
 serial_port = '/dev/tty.usbmodem101'
 
 def point_at_parameter(p1, p2, t):
@@ -175,4 +175,3 @@ class key:
         self.topright = copy.copy(self.initialposition[1])
         self.bottomright = copy.copy(self.initialposition[2])
         self.bottomleft = copy.copy(self.initialposition[3])
-

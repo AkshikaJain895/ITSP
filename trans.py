@@ -115,8 +115,7 @@ while True:
     for somekey in blackkeys:
         somekey.previouslyplaying = somekey.currentlyplaying
         somekey.currentlyplaying = False     
-    
-    frame_landmarks = []    
+      
     if results.multi_hand_landmarks:
         for hand_landmarks, handedness in zip(results.multi_hand_landmarks, results.multi_handedness):
             hand_label = handedness.classification[0].label          
@@ -133,7 +132,7 @@ while True:
                 h, w, _ = frame.shape
                 cx, cy = int(landmark.x * w), int(landmark.y * h)
                 is_left = 0
-                if hand_label == 'Left':
+                if hand_label == 'Right':
                     is_left = 1
 
                 fsr_index = (idx // 4 - 1) * (1 - is_left) + (4 - (idx//4 - 1) + 5) * is_left
@@ -166,15 +165,13 @@ while True:
                                 print("Sent the midi note")
                             break
             
-            # stop keys which are not being played
-            for somekey in whitekeys:
-                if (somekey.previouslyplaying and not somekey.currentlyplaying):
-                    somekey.stop(outport)
-            for somekey in blackkeys:
-                if (somekey.previouslyplaying and not somekey.currentlyplaying):
-                    somekey.stop(outport)
-
-            frame_landmarks.append(hand_landmarks_data)
+        # stop keys which are not being played
+        for somekey in whitekeys:
+            if not somekey.currentlyplaying:
+                somekey.stop(outport)
+        for somekey in blackkeys:
+            if not somekey.currentlyplaying:
+                somekey.stop(outport)
     
     #if no hands on screen, stop all keys
     else:
